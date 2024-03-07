@@ -64,7 +64,7 @@ function getCurrentLocation() {
  //  =================================  Current  weather ===========================
 
  function CurrentWeather() {
-    currentTown ="Colombo";
+    // currentTown ="Colombo";
     for (let i = 1; i < 4; i++) {
         let currentDate = new Date();
         let DaysAgo = new Date(currentDate);
@@ -98,11 +98,11 @@ function getCurrentLocation() {
             // let Search = search.charAt(0).toUpperCase() + search.slice(1)
             document.getElementById("sCity").innerHTML = "";
             document.getElementById("cwIcon").src = data["current"]["condition"]["icon"];
-            document.getElementById("temp").innerHTML = data["current"]["temp_c"] + "°C";
-            document.getElementById("tz_id").innerHTML = data["location"]["tz_id"];
-            document.getElementById("temp_c").innerHTML = data["current"]["temp_c"];
-            document.getElementById("humidity").innerHTML = data["current"]["humidity"];
-            document.getElementById("wind_kph").innerHTML = data["current"]["wind_kph"];
+            document.getElementById("temp").innerHTML = data["current"]["temp_c"] + " °C";
+            document.getElementById("tz_id").innerHTML = data["location"]["tz_id"] ;
+            document.getElementById("temp_c").innerHTML = data["current"]["temp_c"] +" °C";
+            document.getElementById("humidity").innerHTML = data["current"]["humidity"]+" % ";
+            document.getElementById("wind_kph").innerHTML = data["current"]["wind_kph"] +" kph";
             document.getElementById("url").innerHTML = data["current"]["condition"]["text"];
             document.getElementById("region").innerHTML = data["location"]["region"];
             document.getElementById("country").innerHTML = data["location"]["country"];
@@ -117,7 +117,33 @@ function getCurrentLocation() {
         })
         .catch(error => {
             document.getElementById("sCity").innerHTML = "Suggester city ";
+
             alert('City not found');
+
+
+            fetch(`http://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=Colombo`, repo).then(respone => respone.json())
+            .then(data => {
+                console.log(data);
+                // let Search = search.charAt(0).toUpperCase() + search.slice(1)
+                // document.getElementById("sCity").innerHTML = "";
+                document.getElementById("cwIcon").src = data["current"]["condition"]["icon"];
+                document.getElementById("temp").innerHTML = data["current"]["temp_c"] + " °C";
+                document.getElementById("tz_id").innerHTML = data["location"]["tz_id"] ;
+                document.getElementById("temp_c").innerHTML = data["current"]["temp_c"] +" °C";
+                document.getElementById("humidity").innerHTML = data["current"]["humidity"]+" % ";
+                document.getElementById("wind_kph").innerHTML = data["current"]["wind_kph"] +" kph";
+                document.getElementById("url").innerHTML = data["current"]["condition"]["text"];
+                document.getElementById("region").innerHTML = data["location"]["region"];
+                document.getElementById("country").innerHTML = data["location"]["country"];
+                document.getElementById("cityName").innerHTML = "Colombo";
+                console.log(currentLocation);
+                let lat = data["location"]["lat"];
+                let lon = data["location"]["lon"];
+                initializeMap(lat, lon);
+                // document.getElementById("t4").innerHTML = data["current"]["temp_c"] + "°C";
+    
+                dayData();
+            })
         })
 
 
@@ -136,21 +162,21 @@ function weatherSearch() {
             let Search = search.charAt(0).toUpperCase() + search.slice(1)
             document.getElementById("sCity").innerHTML = "";
             document.getElementById("cwIcon").src = data["current"]["condition"]["icon"];
-            document.getElementById("temp").innerHTML = data["current"]["temp_c"] + "°C";
-            document.getElementById("tz_id").innerHTML = data["location"]["tz_id"];
-            document.getElementById("temp_c").innerHTML = data["current"]["temp_c"];
-            document.getElementById("humidity").innerHTML = data["current"]["humidity"];
-            document.getElementById("wind_kph").innerHTML = data["current"]["wind_kph"];
+            document.getElementById("temp").innerHTML = data["current"]["temp_c"] + " °C";
+            document.getElementById("tz_id").innerHTML = data["location"]["tz_id"] ;
+            document.getElementById("temp_c").innerHTML = data["current"]["temp_c"] +" °C";
+            document.getElementById("humidity").innerHTML = data["current"]["humidity"]+" % ";
+            document.getElementById("wind_kph").innerHTML = data["current"]["wind_kph"] +" kph";
             document.getElementById("url").innerHTML = data["current"]["condition"]["text"];
             document.getElementById("region").innerHTML = data["location"]["region"];
             document.getElementById("country").innerHTML = data["location"]["country"];
-            document.getElementById("cityName").innerHTML = search;
+            document.getElementById("cityName").innerHTML = data.location.name;
             currentLocation=search;
             console.log(currentLocation);
             let lat = data["location"]["lat"];
             let lon = data["location"]["lon"];
             initializeMap(lat, lon);
-            document.getElementById("t4").innerHTML = data["current"]["temp_c"] + "°C";
+            // document.getElementById("t4").innerHTML = data["current"]["temp_c"] + "°C";
 
             dayData();
         })

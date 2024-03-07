@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Include Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container-fluid {
+      padding: 20px;
+    }
+
+    .footer {
+      background-color: #343a40;
+      color: #ffffff;
+      padding: 30px 0;
+    }
+
+    .footer h5 {
+      color: #007bff;
+    }
+
+    .social-icons a {
+      font-size: 24px;
+      color: #ffffff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      color: #007bff;
+    }
+
+    .subscribe-form {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 576px) {
+      .footer {
+        text-align: center;
+      }
+    }
+  </style>
+  <title>Your Weather Website</title>
+</head>
+<body>
+
+  <div class="container-fluid">
+    <!-- Your website content goes here -->
+
+    <footer class="footer mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Subscribe to Our Newsletter</h5>
+            <form class="form-inline subscribe-form">
+              <div class="input-group">
+                <input type="email" class="form-control" placeholder="Enter your email" required>
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary">Subscribe</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <h5>Follow Us</h5>
+            <div class="social-icons">
+              <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+              <!-- Add more social media icons as needed -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Bootstrap JS and Font Awesome icons (you can use your own preferred version) -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
