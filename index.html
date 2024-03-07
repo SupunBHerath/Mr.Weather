@@ -11,6 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <!-- Add this line to include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 
@@ -34,11 +37,12 @@
 
         .homeCard {
             margin-top: 10px;
-            width: max-content;
+            width: 250px;
             padding: 10px 20px;
             background-color: rgba(255, 255, 255, 0.5);
             box-shadow: 0 0 0 5px rgba(39, 18, 232, 0.2);
             margin: auto;
+            border-radius: 100%;
         }
 
         .homeCard img {
@@ -199,14 +203,25 @@
         .navBar ul li:hover::after {
             width: 100%;
         }
+
+        footer {
+            /* text-align: center; */
+            background-color: rgb(20, 20, 23);
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+
+        }
+
+        .fab {
+            font-size: 30px;
+            padding: 10px 30px;
+        }
     </style>
 </head>
 
 <body>
-    <!-- home  -->
-    <!-- <div class="loader-container">
-        <div class="loader"></div>
-    </div> -->
+
     <div class=" home">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -258,58 +273,28 @@
                 <div class="carousel-item active">
                     <div class="card homeCard">
                         <div class="card-body">
-                            <h5 class="card-title">Yesterday's Weather</h5>
-                            <center>
-                                <table class="cwTbl">
-                                    <tr>
-                                        <td class=" pt-2 p-4 pb-2">
-                                            <img id="homeIconY1" src="image/icon/icon.png" id="" alt="">
-                                        </td>
-                                        <td class=" pt-2 p-4 pb-2">
-                                            <h3 id="currentTemp1">25.2 °C</h3>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </center>
+                            <h3 class="card-title">Yesterday</h3>
+                            <img id="homeIconY1" src="image/icon/icon.png" id="" alt="">
+
+                            <h3 id="currentTemp1">25.2 °C</h3>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="card homeCard">
                         <div class="card-body">
-                            <h5 class="card-title">Today's Weather</h5>
-                            <center>
-                                <table class="cwTbl">
-                                    <tr>
-                                        <td class=" pt-2 p-4 pb-2">
-                                            <img id="homeIconY2" src="image/icon/cloudy.png" id="" alt="">
-                                        </td>
-                                        <td class=" pt-2 p-4 pb-2">
-                                            <h3 id="currentTemp2"> 28 °C</h3>
-                                            <h3 id="currentTemp2"> 28 °C</h3>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </center>
+                            <h3 class="card-title">Today</h3>
+                            <img id="homeIconY2" src="image/icon/cloudy.png" id="" alt="">
+                            <h3 id="currentTemp2"> 28 °C</h3>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="card homeCard">
                         <div class="card-body">
-                            <h5 class="card-title">Tomorrow's Weather</h5>
-                            <center>
-                                <table class="cwTbl">
-                                    <tr>
-                                        <td class=" pt-2 p-4 pb-2">
-                                            <img id="homeIconY3" src="image/icon/sun.png" id="" alt="">
-                                        </td>
-                                        <td class=" pt-2 p-4 pb-2">
-                                            <h3 id="currentTemp3"> 30 °C</h3>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </center>
+                            <h3 class="card-title">Tomorrow</h3>
+                            <img id="homeIconY3" src="image/icon/sun.png" id="" alt="">
+                            <h3 id="currentTemp3"> 30 °C</h3>
                         </div>
                     </div>
                 </div>
@@ -328,20 +313,8 @@
         <br>
 
     </div>
-
-
-
-
-
-
-
-
-
-    </div>
     <!-- home end  -->
     <!-- current Weather -->
-
-
     <br> <br>
     <!-- ///////////////////////////////////////////////////// -->
     <div class="cwDiv m-3">
@@ -368,7 +341,7 @@
                         <td>
                             <h6 style="color: red;" id="cnf"></h6>
                             <h6 style="color: green;" id="sCity"></h6>
-                            <h1 id="cityName" style=" text-transform: capitalize;">Maho</h1>
+                            <h1 id="cityName" style=" text-transform: capitalize;"></h1>
                             <h1 id="temp">25°C</h1>
                         </td>
                     </tr>
@@ -410,9 +383,7 @@
                     <td id="url"></td>
                     <td> <span id="region"></span></td>
                     <td><span id="country"></span></td>
-
                 </tr>
-
             </table>
         </div>
     </div>
@@ -483,10 +454,45 @@
                 </div>
             </nav>
         </div>
-            <div id="map" style="height: 400px;"></div>
+        <div id="map" style="height: 400px;"></div>
     </div>
 
     <!-- map session end  -->
+
+    <div class="container-fluid">
+        <!-- Your website content goes here -->
+
+        <footer class="footer mt-5">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Subscribe to Our Newsletter</h5>
+                        <form class="form-inline subscribe-form mt-5">
+                            <div class="input-group" style=" width: 350px;">
+                                <input type="email" class="form-control" placeholder="Enter your email" required>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary "
+                                        style="border-top-left-radius: 0px; border-bottom-left-radius: 0;">Subscribe</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Follow Us</h5>
+                        <div class="social-icons">
+                            <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://linkedin.com/in/yourusername" target="_blank"><i
+                                    class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <!-- Add more social media icons as needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script>
         displayLocalTime();
