@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Foarecast</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+
+    <script src="js/script.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .home {
+            /* background-image: url(image/weather_img1.jpg); */
+            background-image: url(image/galaxy-night-panorama.jpg);
+            height: 100vh;
+            min-height: 750px;
+            width: 100%;
+            background-position: right center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        .homeCard {
+            margin-top: 10px;
+            width: max-content;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 0 5px rgba(39, 18, 232, 0.2);
+            margin: auto;
+        }
+
+        .homeCard img {
+            width: 70px;
+            height: 70px;
+
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.00);
+
+
+        }
+
+        .home .navbar a {
+            color: white;
+            /* text-align: right; */
+        }
+
+        .searchArea {
+            margin-top: 10vh;
+            text-align: center;
+
+        }
+
+        .searchArea h1 {
+            color: white;
+            text-align: center;
+            /* font-size: 5vw; */
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+        }
+
+
+        .search-bar {
+            padding: 10px;
+            width: 50vw;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+
+        }
+
+        .search-button {
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0);
+            color: blue;
+            border-color: blue;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .search-button:hover {
+            color: white;
+            background-color: blue;
+        }
+
+        #weatherIcon {
+            width: 100px;
+            height: 100px;
+            float: inline-start;
+        }
+
+        #searchBar {
+            width: 20vw;
+        }
+
+        .cwDiv {
+            height: max-content;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 10px;
+            padding: 20px;
+
+        }
+
+        .cwDivTitle {
+            background-image: url(image/earth.jpg);
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* margin-top: 20px; */
+            background-color: rgb(20, 20, 23);
+            height: max-content;
+            border-color: black;
+            border-style: solid;
+        }
+
+        #searchbtn {
+            width: 80px;
+            float: inline-end;
+        }
+
+        #cwIcon {
+            width: auto;
+            height: 150px;
+            float: inline-start;
+        }
+
+        .cwTbl {
+            border-collapse: collapse;
+        }
+
+        .cwTbl2 {
+            width: 100%;
+        }
+
+        .cwTbl2 td {
+            text-align: center;
+            border: 2px solid #fff;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        #wfIcon td {
+            height: 50px;
+            background-color: white;
+            border: 2px solid #302f2f;
+            color: #302f2f;
+
+        }
+
+        .wfTem td {
+            background-color: white;
+            color: #333;
+            font-weight: 700;
+            border: 2px solid #302f2f;
+
+        }
+
+
+
+
+
+        .navBar ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 8px 12px;
+            position: relative;
+            font-weight: 700;
+        }
+
+
+        .navBar ul li::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #3085C3;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+
+        .navBar ul li:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- home  -->
+    <!-- <div class="loader-container">
+        <div class="loader"></div>
+    </div> -->
+    <div class=" home">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">🌍Mr.Weather</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse navBar" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Current Weather</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Location</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" aria-disabled="true">News</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="searchArea">
+            <h1 class="mb-5 display-1">Welcome to Weather Foarecast </h1>
+
+            <h3 style="color:rgb(255, 255, 255); font-weight: 700; font-style: italic; ">"Get easy, accurate local
+                weather forecasts for hassle-free planning." </h3>
+            <br>
+            <button type="button" class="btn btn-primary">Find Weather</button>
+
+        </div>
+
+        <div id="carouselExampleCaptions" class="carousel slide "
+            style=" width:550px; margin: auto ; padding: 60px; text-align: center;">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner" style="justify-content: center;">
+                <div class="carousel-item active">
+                    <div class="card homeCard">
+                        <div class="card-body">
+                            <h5 class="card-title">Yesterday's Weather</h5>
+                            <center>
+                                <table class="cwTbl">
+                                    <tr>
+                                        <td class=" pt-2 p-4 pb-2">
+                                            <img id="homeIconY1" src="image/icon/icon.png" id="" alt="">
+                                        </td>
+                                        <td class=" pt-2 p-4 pb-2">
+                                            <h3 id="currentTemp1">25.2 °C</h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card homeCard">
+                        <div class="card-body">
+                            <h5 class="card-title">Today's Weather</h5>
+                            <center>
+                                <table class="cwTbl">
+                                    <tr>
+                                        <td class=" pt-2 p-4 pb-2">
+                                            <img id="homeIconY2" src="image/icon/cloudy.png" id="" alt="">
+                                        </td>
+                                        <td class=" pt-2 p-4 pb-2">
+                                            <h3 id="currentTemp2"> 28 °C</h3>
+                                            <h3 id="currentTemp2"> 28 °C</h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card homeCard">
+                        <div class="card-body">
+                            <h5 class="card-title">Tomorrow's Weather</h5>
+                            <center>
+                                <table class="cwTbl">
+                                    <tr>
+                                        <td class=" pt-2 p-4 pb-2">
+                                            <img id="homeIconY3" src="image/icon/sun.png" id="" alt="">
+                                        </td>
+                                        <td class=" pt-2 p-4 pb-2">
+                                            <h3 id="currentTemp3"> 30 °C</h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <br>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    </div>
+    <!-- home end  -->
+    <!-- current Weather -->
+
+
+    <br> <br>
+    <!-- ///////////////////////////////////////////////////// -->
+    <div class="cwDiv m-3">
+        <div class="cwDivTitle">
+            <nav class="navbar navbar-expand-lg  ">
+                <div class="container-fluid">
+                    <h1 class="navbar-brand" id="local-day" style="color: white; font-weight: 600;"> </h1>
+                    <div class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" id="searchText" placeholder="Search"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success" id="searchWeatherBtn"
+                            onclick="weatherSearch()">Search</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <nav class="navbar navbar-expand-lg  ">
+            <div class="container-fluid">
+                <table class="cwTbl">
+                    <tr>
+                        <td>
+                            <img src="image/icon/cloudy.png" id="cwIcon" alt="">
+                        </td>
+                        <td>
+                            <h6 style="color: red;" id="cnf"></h6>
+                            <h6 style="color: green;" id="sCity"></h6>
+                            <h1 id="cityName" style=" text-transform: capitalize;">Maho</h1>
+                            <h1 id="temp">25°C</h1>
+                        </td>
+                    </tr>
+                </table>
+                <div class="d-flex m-3" role="search">
+                    <h1 id="local-time"></h1>
+                    <hr>
+
+                </div>
+
+            </div>
+        </nav>
+        <br>
+        <div style="overflow-x:auto;">
+            <table class="cwTbl2">
+                <tr class="wfTem">
+                    <td><strong>📍Location</strong></td>
+
+                    <td><strong>🌡Temperature</strong></td>
+
+                    <td><strong>❄️Humidity</strong></td>
+
+                    <td><strong>🍃Wind Speed</strong></td>
+
+                    <td><strong>💧Condition</strong></td>
+
+                    <td><strong>🎗Region</strong></td>
+
+                    <td><strong>🗺 Country</strong></td>
+
+
+
+                </tr>
+                <tr class="wfTem">
+                    <td><span id="tz_id"></span></td>
+                    <td><span id="temp_c"></span></td>
+                    <td><span id="humidity"></span></td>
+                    <td><span id="wind_kph"></span></td>
+                    <td id="url"></td>
+                    <td> <span id="region"></span></td>
+                    <td><span id="country"></span></td>
+
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <!-- ///////////////////////////////////////////////////// -->
+
+    <br>
+    <!-- weather forecast  -->
+    <div class="cwDiv m-3">
+        <div class="cwDivTitle">
+            <nav class="navbar navbar-expand-lg  ">
+                <div class="container-fluid">
+                    <h1 class="navbar-brand" style="color: white; font-weight: 600;">7 Day's Forecast : </h1>
+                </div>
+            </nav>
+        </div>
+        <br>
+        <div style="overflow-x:auto;">
+            <table class="cwTbl2 ">
+                <tr class="wfTem">
+                    <td><span id="d7"></span></td>
+                    <td><span id="d6"></span></td>
+                    <td><span id="d5"></span></td>
+                    <td><span id="d4"></span></td>
+                    <td id="d3">Cloudy</td>
+                    <td><span id="d2" style="color: blue;"></span></td>
+                    <td><span id="d1"></span></td>
+
+                </tr>
+                <tr id="wfIcon">
+                    <td> <img id="i7" src="image/icon/cloudy.png" alt="">
+                        <h4><span id="t7"></span></h4>
+                    </td>
+                    <td> <img id="i6" src="image/icon/cloudy.png" alt="">
+                        <h4><span id="t6"></span></h4>
+                    </td>
+                    <td> <img id="i5" src="image/icon/cloudy.png" alt="">
+                        <h4><span id="t5"></span></h4>
+                    </td>
+                    <td> <img id="i4" src="image/icon/cloudy.png" alt="">
+                        <h4><span id="t4"></span></h4>
+                    </td>
+                    <td> <img id="i3" src="image/icon/cloudy.png" alt="">
+                        <h4><span id="t3"></span></h4>
+                    </td>
+                    <td> <img id="i2" src="image/icon/cloudy.png" alt="">
+                        <h4><span id="t2"></span></h4>
+                    </td>
+                    <td> <img id="i1" src="image/icon/cloudy.png" alt="">
+                        <h4><span id="t1"></span></h4>
+                    </td>
+
+
+                </tr>
+
+
+            </table>
+        </div>
+
+    </div>
+    <!-- weather forecast  end  -->
+    <br><br>
+    <!-- map session start  -->
+    <div class="cwDiv m-3">
+        <div class="cwDivTitle">
+            <nav class="navbar navbar-expand-lg  ">
+                <div class="container-fluid">
+                    <h1 class="navbar-brand" style="color: white; font-weight: 600;">Location : </h1>
+                </div>
+            </nav>
+        </div>
+            <div id="map" style="height: 400px;"></div>
+    </div>
+
+    <!-- map session end  -->
+
+    <script>
+        displayLocalTime();
+        displayLocalDay();
+        function displayLocalDay() {
+            let currentDate = new Date();
+            let DaysAgo = new Date(currentDate);
+            // Format the date to match the API's expected format (YYYY-MM-DD)
+            let formattedDate = DaysAgo.toISOString().split('T')[0];
+            let coloredDate = "<span style='color: blue;'>" + formattedDate + "</span>";
+            document.getElementById("local-day").innerHTML = "Current Weather : [ " + coloredDate + " ]";
+        }
+
+        function displayLocalTime() {
+            var now = new Date();
+            var localTime = now.toLocaleTimeString();
+            document.getElementById('local-time').innerHTML = localTime;
+        }
+        setInterval(displayLocalTime, 1000);
+        window.onload = displayLocalTime;
+    </script>
+
+</body>
+
+</html>
