@@ -11,213 +11,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <!-- Add this line to include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-
     <script src="js/script.js"></script>
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .home {
-            /* background-image: url(image/weather_img1.jpg); */
-            background-image: url(image/galaxy-night-panorama.jpg);
-            height: 100vh;
-            min-height: 750px;
-            width: 100%;
-            background-position: right center;
-            background-repeat: no-repeat;
-            background-size: cover;
-
-        }
-
-        .homeCard {
-            margin-top: 10px;
-            width: 250px;
-            padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 0 5px rgba(39, 18, 232, 0.2);
-            margin: auto;
-            border-radius: 100%;
-        }
-
-        .homeCard img {
-            width: 70px;
-            height: 70px;
-
-        }
-
-        .navbar {
-            background-color: rgba(255, 255, 255, 0.00);
-
-
-        }
-
-        .home .navbar a {
-            color: white;
-            /* text-align: right; */
-        }
-
-        .searchArea {
-            margin-top: 10vh;
-            text-align: center;
-
-        }
-
-        .searchArea h1 {
-            color: white;
-            text-align: center;
-            /* font-size: 5vw; */
-            font-weight: bold;
-            margin-top: 20px;
-            margin-bottom: 20px;
-
-        }
-
-
-        .search-bar {
-            padding: 10px;
-            width: 50vw;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-
-        }
-
-        .search-button {
-            padding: 10px;
-            background-color: rgba(255, 255, 255, 0);
-            color: blue;
-            border-color: blue;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .search-button:hover {
-            color: white;
-            background-color: blue;
-        }
-
-        #weatherIcon {
-            width: 100px;
-            height: 100px;
-            float: inline-start;
-        }
-
-        #searchBar {
-            width: 20vw;
-        }
-
-        .cwDiv {
-            height: max-content;
-            background-color: rgb(255, 255, 255);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            border-radius: 10px;
-            padding: 20px;
-
-        }
-
-        .cwDivTitle {
-            background-image: url(image/earth.jpg);
-            background-position: top;
-            background-repeat: no-repeat;
-            background-size: cover;
-            /* margin-top: 20px; */
-            background-color: rgb(20, 20, 23);
-            height: max-content;
-            border-color: black;
-            border-style: solid;
-        }
-
-        #searchbtn {
-            width: 80px;
-            float: inline-end;
-        }
-
-        #cwIcon {
-            width: auto;
-            height: 150px;
-            float: inline-start;
-        }
-
-        .cwTbl {
-            border-collapse: collapse;
-        }
-
-        .cwTbl2 {
-            width: 100%;
-        }
-
-        .cwTbl2 td {
-            text-align: center;
-            border: 2px solid #fff;
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
-        }
-
-        #wfIcon td {
-            height: 50px;
-            background-color: white;
-            border: 2px solid #302f2f;
-            color: #302f2f;
-
-        }
-
-        .wfTem td {
-            background-color: white;
-            color: #333;
-            font-weight: 700;
-            border: 2px solid #302f2f;
-
-        }
-
-
-
-
-
-        .navBar ul li {
-            list-style: none;
-            display: inline-block;
-            padding: 8px 12px;
-            position: relative;
-            font-weight: 700;
-        }
-
-
-        .navBar ul li::after {
-            content: '';
-            width: 0%;
-            height: 2px;
-            background: #3085C3;
-            display: block;
-            margin: auto;
-            transition: 0.5s;
-        }
-
-        .navBar ul li:hover::after {
-            width: 100%;
-        }
-
-        footer {
-            /* text-align: center; */
-            background-color: rgb(20, 20, 23);
-            color: white;
-            padding: 10px;
-            margin-top: 20px;
-
-        }
-
-        .fab {
-            font-size: 30px;
-            padding: 10px 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="Css/style.css">
+  
 </head>
 
 <body>
@@ -244,7 +42,15 @@
                         <li class="nav-item">
                             <a class="nav-link disabled" aria-disabled="true">News</a>
                         </li>
+                        <li class="nav-item">
+
+                        </li>
+
                     </ul>
+                    <div class="form-check form-switch darkMode">
+                        <label class="form-check-label text-light " for="darkMode">Dark Mode </label>
+                        <input class="form-check-input" type="checkbox" role="switch" id="darkMode">
+                    </div>
                 </div>
             </div>
         </nav>
@@ -260,7 +66,7 @@
         </div>
 
         <div id="carouselExampleCaptions" class="carousel slide "
-            style=" width:550px; margin: auto ; padding: 60px; text-align: center;">
+            style=" width:550px; margin: auto ; padding: 60px; text-align: center; ">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -269,7 +75,7 @@
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
             </div>
-            <div class="carousel-inner" style="justify-content: center;">
+            <div class="carousel-inner" style="justify-content: center;  padding: 10px;">
                 <div class="carousel-item active">
                     <div class="card homeCard">
                         <div class="card-body">
@@ -376,7 +182,7 @@
 
                 </tr>
                 <tr class="wfTem">
-                    <td><span id="tz_id"></span></td>
+                    <td><span id="tz_id"></span> </td>
                     <td><span id="temp_c"></span></td>
                     <td><span id="humidity"></span></td>
                     <td><span id="wind_kph"></span></td>
@@ -484,9 +290,7 @@
                             <a href="https://linkedin.com/in/yourusername" target="_blank"><i
                                     class="fab fa-linkedin"></i></a>
                             <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-
                             <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                            <!-- Add more social media icons as needed -->
                         </div>
                     </div>
                 </div>
@@ -513,7 +317,14 @@
         }
         setInterval(displayLocalTime, 1000);
         window.onload = displayLocalTime;
+
+
+
+        document.getElementById('darkMode').addEventListener('change', function () {
+            document.body.classList.toggle('dark-mode', this.checked);
+        });
     </script>
+
 
 </body>
 
