@@ -108,9 +108,9 @@ function CurrentWeather() {
             fetch(`http://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=Colombo`, repo).then(respone => respone.json())
                 .then(data => {
                     document.getElementById("cwIcon").src = data["current"]["condition"]["icon"];
-                    document.getElementById("temp").innerHTML = data["current"]["temp_c"] + " °C";
+                    // document.getElementById("temp").innerHTML = data["current"]["temp_c"] + " °C";
                     document.getElementById("tz_id").innerHTML = data["location"]["tz_id"];
-                    document.getElementById("temp_c").innerHTML = data["current"]["temp_c"] + " °C";
+                    // document.getElementById("temp_c").innerHTML = data["current"]["temp_c"] + " °C";
                     document.getElementById("humidity").innerHTML = data["current"]["humidity"] + " % ";
                     document.getElementById("wind_kph").innerHTML = data["current"]["wind_kph"] + " kph";
                     document.getElementById("url").innerHTML = data["current"]["condition"]["text"];
@@ -118,10 +118,22 @@ function CurrentWeather() {
                     document.getElementById("country").innerHTML = data["location"]["country"];
                     document.getElementById("cityName").innerHTML = "Colombo";
                     console.log(currentLocation);
+                    console.log(data);
                     let lat = data["location"]["lat"];
                     let lon = data["location"]["lon"];
                     initializeMap(lat, lon);
                     dayData();
+                     let check  = document.getElementById("temRadio_F").checked;
+                     console.log("--------------------------------");
+
+                     if (check) {
+                    document.getElementById("temp_c").innerHTML = data["current"]["temp_f"] + " F";
+                    document.getElementById("temp").innerHTML = data["current"]["temp_f"] + " F";
+                     }else{
+                        document.getElementById("temp_c").innerHTML = data["current"]["temp_c"] + "  °C";
+                        document.getElementById("temp").innerHTML = data["current"]["temp_c"] + " °C";
+                     }
+                     console.log(check);
 
                 })
         })
@@ -157,6 +169,15 @@ function weatherSearch() {
             let lon = data["location"]["lon"];
             initializeMap(lat, lon);
             dayData();
+            let check  = document.getElementById("temRadio_F").checked;
+
+            if (check) {
+                document.getElementById("temp_c").innerHTML = data["current"]["temp_f"] + " F";
+                document.getElementById("temp").innerHTML = data["current"]["temp_f"] + " F";
+                 }else{
+                    document.getElementById("temp_c").innerHTML = data["current"]["temp_c"] + "  °C";
+                    document.getElementById("temp").innerHTML = data["current"]["temp_c"] + " °C";
+                 }
 
         })
         .catch(error => {
@@ -190,7 +211,7 @@ function dayData() {
             .then(data => {
                 console.log(data);
                 let d = "d" + i;
-                console.log(d);
+                // console.log(d);
                 document.getElementById(d).innerHTML = formattedDate;
                 let tem = "t" + i;
                 let img = "i" + i;
@@ -200,7 +221,7 @@ function dayData() {
 
             })
             .catch(error => {
-                console.error("Error fetching weather data:", error);
+                console.log("Error: " + error);
             });
     }
 

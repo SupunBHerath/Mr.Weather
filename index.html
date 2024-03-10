@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="js/script.js"></script>
     <link rel="stylesheet" href="Css/style.css">
-  
+
 </head>
 
 <body>
@@ -164,15 +164,22 @@
         <div style="overflow-x:auto;">
             <table class="cwTbl2">
                 <tr class="wfTem">
-                    <td><strong>📍Location</strong></td>
 
-                    <td><strong>🌡Temperature</strong></td>
+                    <td><strong>🌡Temperature</strong>
+                        <h6><input class="unit" type="radio" name="temRadio" id="temRadio_F" onclick="weatherSearch()">
+                            F
+                            <input class="unit" type="radio" name="temRadio" id="temRadio_C" onclick=" weatherSearch()">
+                            °C
+                        </h6>
+                    </td>
 
                     <td><strong>❄️Humidity</strong></td>
 
                     <td><strong>🍃Wind Speed</strong></td>
 
                     <td><strong>💧Condition</strong></td>
+
+                    <td><strong>📍Location</strong></td>
 
                     <td><strong>🎗Region</strong></td>
 
@@ -182,11 +189,11 @@
 
                 </tr>
                 <tr class="wfTem">
-                    <td><span id="tz_id"></span> </td>
                     <td><span id="temp_c"></span></td>
                     <td><span id="humidity"></span></td>
                     <td><span id="wind_kph"></span></td>
                     <td id="url"></td>
+                    <td><span id="tz_id"></span> </td>
                     <td> <span id="region"></span></td>
                     <td><span id="country"></span></td>
                 </tr>
@@ -213,7 +220,7 @@
                     <td><span id="d6"></span></td>
                     <td><span id="d5"></span></td>
                     <td><span id="d4"></span></td>
-                    <td id="d3">Cloudy</td>
+                    <td><span id="d3"></span></td>
                     <td><span id="d2" style="color: blue;"></span></td>
                     <td><span id="d1"></span></td>
 
