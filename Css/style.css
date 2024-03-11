@@ -1,0 +1,228 @@
+     /* dark mode css  starts */
+     body.dark-mode,
+     body.dark-mode .cwDiv,
+     body.dark-mode .modal-content,
+     body.dark-mode .cwTbl2 td,
+     body.dark-mode #wfIcon td,
+     body.dark-mode .homeCard,
+     body.dark-mode .wfTem td {
+         background-color: #222222;
+         color: #fff;
+
+     }
+
+     body.dark-mode .homeCard {
+         box-shadow: 0 0 0 5px rgba(255, 255, 255, .5);
+
+     }
+
+     body.dark-mode #searchText,
+     body.dark-mode #searchText::placeholder {
+         color: #999;
+         background-color: #1e1d1d;
+         color: #fff;
+     }
+
+      /* dark mode css  End */
+
+
+     body {
+         background-color: #f8f9fa;
+     }
+
+     .home {
+         /* background-image: url(image/weather_img1.jpg); */
+         background-image: url(../image/galaxy-night-panorama.jpg);
+       min-height: 100vh;
+         min-height: 750px;
+         width: 100%;
+         background-position: right center;
+         background-repeat: no-repeat;
+         background-size: cover;
+
+     }
+
+     .homeCard {
+         margin-top: 10px;
+         width: 250px;
+         height: 250px;
+         padding: 10px 20px;
+         background-color: rgba(255, 255, 255, 0.5);
+         box-shadow: 0 0 0 5px rgba(39, 18, 232, 0.2);
+         margin: auto;
+         border-radius: 100%;
+     }
+
+     .homeCard img {
+         width: 70px;
+         height: 70px;
+
+     }
+
+     .navbar {
+         background-color: rgba(255, 255, 255, 0.00);
+
+
+     }
+
+     .home .navbar a {
+         color: white;
+         /* text-align: right; */
+     }
+
+     .searchArea {
+         margin-top: 10vh;
+         text-align: center;
+
+     }
+
+     .searchArea h1 {
+         color: white;
+         text-align: center;
+         font-weight: bold;
+         margin-top: 20px;
+         margin-bottom: 20px;
+
+     }
+
+   
+     #weatherIcon {
+         width: 100px;
+         height: 100px;
+         float: inline-start;
+     }
+
+     #searchBar {
+         width: 20vw;
+     }
+
+     .cwDiv {
+         height: max-content;
+         background-color: rgb(255, 255, 255);
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+         border-radius: 10px;
+         padding: 20px;
+
+     }
+
+     .cwDivTitle {
+         background-image: url(../image/earth.jpg);
+         background-position: top;
+         background-repeat: no-repeat;
+         background-size: cover;
+         /* margin-top: 20px; */
+         background-color: rgb(20, 20, 23);
+         height: max-content;
+         border-color: black;
+         border-style: solid;
+     }
+
+     #searchbtn {
+         width: 80px;
+         float: inline-end;
+     }
+
+     #cwIcon {
+         width: auto;
+         height: 150px;
+         float: inline-start;
+     }
+
+     .cwTbl {
+         border-collapse: collapse;
+     }
+
+     .cwTbl2 {
+         width: 100%;
+     }
+
+     .cwTbl2 td {
+         text-align: center;
+         border: 2px solid #fff;
+         padding: 10px;
+         background-color: #333;
+         color: #fff;
+     }
+
+     #wfIcon td {
+         height: 50px;
+         background-color: white;
+         border: 2px solid #302f2f;
+         color: #302f2f;
+
+     }
+
+     .wfTem td {
+         background-color: white;
+         color: #333;
+         font-weight: 700;
+         border: 2px solid #302f2f;
+
+     }
+
+
+
+
+
+     .navBar ul li {
+         list-style: none;
+         display: inline-block;
+         padding: 8px 12px;
+         position: relative;
+         font-weight: 700;
+     }
+
+
+     .navBar ul li::after {
+         content: '';
+         width: 0%;
+         height: 2px;
+         background: #3085C3;
+         display: block;
+         margin: auto;
+         transition: 0.5s;
+     }
+
+     .navBar ul li:hover::after {
+         width: 100%;
+     }
+
+     footer {
+         /* text-align: center; */
+         background-color: rgb(20, 20, 23);
+         color: white;
+         padding: 10px;
+         margin-top: 20px;
+
+     }
+
+     .fab {
+         font-size: 30px;
+         padding: 10px 30px;
+     }
+     .unit{
+        padding: 50px ;
+        background-color: #302f2f;
+        
+     }
+     .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+    .modal-body{
+        padding-bottom: 0;
+        padding-top: 5px;
+    }
+    .modal-content{
+        background-color: #bebec2;
+    }
+    .modal-title{
+        font-weight: 700;
+    }
+    
