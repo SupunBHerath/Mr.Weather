@@ -159,6 +159,10 @@
          border: 2px solid #302f2f;
 
      }
+     #wfIcon td img {
+        max-width: 70px;
+        height: auto;
+     }
 
 
 
