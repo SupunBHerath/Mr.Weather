@@ -1,17 +1,6 @@
 # Mr.Weather
-
-![Mr.Weather Logo](link/to/logo.png) <!-- If you have a logo, include it here -->
-
+<!-- If you have a logo, include it here -->
 Get easy, accurate local weather forecasts for hassle-free planning.
-
-## Table of Contents
-- [Introduction](#introduction)
-- [Features](#features)
-- [Demo](#demo)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contribution](#contribution)
-- [License](#license)
 
 ## Introduction
 Mr.Weather is a user-friendly application that provides easy access to accurate local weather forecasts, allowing users to plan their activities with confidence. Whether you're planning a trip, a weekend outing, or just curious about the weather, Mr.Weather has you covered.
