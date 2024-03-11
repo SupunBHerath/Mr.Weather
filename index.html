@@ -66,7 +66,7 @@
         </div>
 
         <div id="carouselExampleCaptions" class="carousel slide "
-            style=" width:550px; margin: auto ; padding: 60px; text-align: center; ">
+            style=" margin: auto ; padding: 40px; text-align: center; ">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -142,18 +142,18 @@
                 <table class="cwTbl">
                     <tr>
                         <td>
-                            <img src="image/icon/cloudy.png" id="cwIcon" alt="">
+                            <img src="image/icon/cloudy.png" id="cwIcon" alt="updating..">
                         </td>
                         <td>
                             <h6 style="color: red;" id="cnf"></h6>
                             <h6 style="color: green;" id="sCity"></h6>
                             <h1 id="cityName" style=" text-transform: capitalize;"></h1>
-                            <h1 id="temp">25°C</h1>
+                            <h1 id="temp">updating..</h1>
                         </td>
                     </tr>
                 </table>
                 <div class="d-flex m-3" role="search">
-                    <h1 id="local-time"></h1>
+                    <h1 id="local-time">updating..</h1>
                     <hr>
 
                 </div>
@@ -161,41 +161,114 @@
             </div>
         </nav>
         <br>
+
+        <!-- Change unit btn -->
+
+        <button class="btn btn-primary mb-3 p-2" data-bs-toggle="modal" data-bs-target="#temperatureModal">Change Unit</button>
+
+        <div class="modal fade " id="temperatureModal" tabindex="-1" aria-labelledby="temperatureModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog " >
+                <div class="modal-content">
+                    <div class="modal-header" >
+                        <h5 class="modal-title h4"id="selectUnit" >Select Unit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" >
+                        <h5 class="modal-title" id="">Temperature :</h5>
+                        <form>
+                            <div class="mb-3 p-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="unit" id="t_c" value="C">
+                                    <label class="form-check-label" for="t_c">Celsius (C)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="unit" id="t_f" value="F">
+                                    <label class="form-check-label" for="t_f">Fahrenheit(F)</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="temperatureModalLabel">Wind Speed :</h5>
+                        <form>
+                            <div class="mb-3 p-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="unit" id="ws_mph" value="mph">
+                                    <label class="form-check-label" for="ws_mph">Miles per hour(mph)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="unit" id="ws_kph" value="kph">
+                                    <label class="form-check-label" for="ws_kph">Kilometers per hour(kph)</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="temperatureModalLabel">Atmospheric Pressure:</h5>
+                        <form>
+                            <div class="mb-3 p-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="unit" id="ap_mph" >
+                                    <label class="form-check-label" for="ap_mph">Millibars(mb)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="unit" id="ap_in" >
+                                    <label class="form-check-label" for="ap_in">Inches of mercury(in)</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="temperatureModalLabel">Wind Gust:</h5>
+                        <form>
+                            <div class="mb-3 p-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="unit" id="wg_mph" value="mb">
+                                    <label class="form-check-label" for="wg_mph">Miles per hour(mph)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="unit" id="wg_in" value="wg_kph">
+                                    <label class="form-check-label" for="wg_in">kilometers per hour(kph)</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" onclick="weatherSearch()"
+                            data-bs-dismiss="modal">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="overlay" class="overlay" onclick="hideOverlay()"></div>
+        
+
         <div style="overflow-x:auto;">
             <table class="cwTbl2">
                 <tr class="wfTem">
+                    <td><strong>💧Condition</strong></td>
 
-                    <td><strong>🌡Temperature</strong>
-                        <h6><input class="unit" type="radio" name="temRadio" id="temRadio_F" onclick="weatherSearch()">
-                            F
-                            <input class="unit" type="radio" name="temRadio" id="temRadio_C" onclick=" weatherSearch()">
-                            °C
-                        </h6>
-                    </td>
-
-                    <td><strong>❄️Humidity</strong></td>
+                    <td><strong>🌡Temperature</strong></td>
 
                     <td><strong>🍃Wind Speed</strong></td>
 
-                    <td><strong>💧Condition</strong></td>
+                    <td><strong>❄️Humidity</strong></td>
 
-                    <td><strong>📍Location</strong></td>
+                    <td><strong>🍃Wind Gust:</strong></td>
 
-                    <td><strong>🎗Region</strong></td>
+                    <td><strong>Atmospheric Pressure</strong></td>
 
-                    <td><strong>🗺 Country</strong></td>
-
-
-
+                    <td><strong>UV Index:</strong></td>
                 </tr>
                 <tr class="wfTem">
-                    <td><span id="temp_c"></span></td>
-                    <td><span id="humidity"></span></td>
-                    <td><span id="wind_kph"></span></td>
-                    <td id="url"></td>
-                    <td><span id="tz_id"></span> </td>
-                    <td> <span id="region"></span></td>
-                    <td><span id="country"></span></td>
+                    <td><span id="url">updating..</span></td>
+                    <td><span id="temp_c">updating..</span></td>
+                    <td><span id="wind_kph">updating..</span></td>
+                    <td><span id="humidity">updating..</span></td>
+                    <td><span id="gust">updating..</span> </td>
+                    <td> <span id="pressure">updating..</span></td>
+                    <td><span id="uv">updating..</span></td>
                 </tr>
             </table>
         </div>
@@ -216,48 +289,82 @@
         <div style="overflow-x:auto;">
             <table class="cwTbl2 ">
                 <tr class="wfTem">
-                    <td><span id="d7"></span></td>
-                    <td><span id="d6"></span></td>
-                    <td><span id="d5"></span></td>
-                    <td><span id="d4"></span></td>
-                    <td><span id="d3"></span></td>
-                    <td><span id="d2" style="color: blue;"></span></td>
-                    <td><span id="d1"></span></td>
+                    <td><span id="d7">updating..</span></td>
+                    <td><span id="d6">updating..</span></td>
+                    <td><span id="d5">updating..</span></td>
+                    <td><span id="d4">updating..</span></td>
+                    <td><span id="d3">updating..</span></td>
+                    <td><span id="d2" style="color: blue;">updating..</span></td>
+                    <td><span id="d1">updating..</span></td>
 
                 </tr>
                 <tr id="wfIcon">
                     <td> <img id="i7" src="image/icon/cloudy.png" alt="">
-                        <h4><span id="t7"></span></h4>
+                        <h4><span id="t7">0</span></h4>
                     </td>
                     <td> <img id="i6" src="image/icon/cloudy.png" alt="">
-                        <h4><span id="t6"></span></h4>
+                        <h4><span id="t6">0</span></h4>
                     </td>
                     <td> <img id="i5" src="image/icon/cloudy.png" alt="">
-                        <h4><span id="t5"></span></h4>
+                        <h4><span id="t5">0</span></h4>
                     </td>
                     <td> <img id="i4" src="image/icon/cloudy.png" alt="">
-                        <h4><span id="t4"></span></h4>
+                        <h4><span id="t4">0</span></h4>
                     </td>
                     <td> <img id="i3" src="image/icon/cloudy.png" alt="">
-                        <h4><span id="t3"></span></h4>
+                        <h4><span id="t3">0</span></h4>
                     </td>
                     <td> <img id="i2" src="image/icon/cloudy.png" alt="">
-                        <h4><span id="t2"></span></h4>
+                        <h4><span id="t2">0</span></h4>
                     </td>
                     <td> <img id="i1" src="image/icon/cloudy.png" alt="">
-                        <h4><span id="t1"></span></h4>
+                        <h4><span id="t1">0</span></h4>
                     </td>
-
-
                 </tr>
-
-
             </table>
         </div>
 
     </div>
     <!-- weather forecast  end  -->
-    <br><br>
+    <br>
+    <!-- Country Details : -->
+    <div class="cwDiv m-3">
+        <div class="cwDivTitle">
+            <nav class="navbar navbar-expand-lg  ">
+                <div class="container-fluid">
+                    <h1 class="navbar-brand" style="color: white; font-weight: 600;">Country Details </h1>
+                </div>
+            </nav>
+        </div>
+        <br>
+        <div style="overflow-x:auto;">
+            <table class="cwTbl2 ">
+                <tr class="wfTem">
+                    <td><span >Region</span></td>
+                    <td><span >Country</span> </td>
+                    <td><span >Capital City</span></td>
+                    <td><span >Time zones</span></td>
+                    <td><span >Population</span></td>
+                    <td><span >Flag</span></td>
+                    <td><span >Coat of arms</span></td>
+
+                </tr>
+                <tr id="wfIcon">
+                    <td><span id="region">Region</span></td>
+                    <td><span id="Country">Country </span></td>
+                    <td><span id="capital">Capital City</span></td>
+                    <td><span id="time">Time zones</span></td>
+                    <td><span id="population" >Population</span></td>
+                    <td><img id="flag" src="" alt="Flag" style="max-width: 70px; height: auto; max-height: 75px;"></td>
+                    <td><img id="cost" src="" alt="cost" style="max-width: 50px; height: auto; max-height: 75px;"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <br>
+
+    <!-- weather forecast  end  -->
     <!-- map session start  -->
     <div class="cwDiv m-3">
         <div class="cwDivTitle">
@@ -304,8 +411,16 @@
             </div>
         </footer>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+
+        function hideOverlay() {
+            $('#temperatureModal').modal('hide');
+        }
+
         displayLocalTime();
         displayLocalDay();
         function displayLocalDay() {
