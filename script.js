@@ -1,7 +1,6 @@
 let currentLocation;
 let currentTown;
 getCurrentLocation();
-
 var currentLocationMarker;
 var map;
 
@@ -80,7 +79,9 @@ function updateMap(newLatitude, newLongitude) {
 
 function CurrentWeather(currentTown) {
     console.log("Location" + currentTown);
-
+    let repo = {
+        method: "GET"
+    };
 
     for (let i = 1; i < 4; i++) {
         let currentDate = new Date();
@@ -102,12 +103,21 @@ function CurrentWeather(currentTown) {
                 document.getElementById(img).src = data["forecast"]["forecastday"]["0"]["day"]["condition"]["icon"];
             })
             .catch(error => {
-                console.log("Failed", error);
+                // console.log("Failed", error);
+                let apiUrl = `http://api.weatherapi.com/v1/history.json?key=f743f38e0e294672b4593454240702&q="Colombo"&dt=${formattedDate}`;
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        let tem = "currentTemp" + i;
+                        let img = "homeIconY" + i;
+                        // console.log(tem);
+                        document.getElementById(tem).innerHTML = data["forecast"]["forecastday"]["0"]["day"]["avgtemp_c"] + "°C";
+                        document.getElementById(img).src = data["forecast"]["forecastday"]["0"]["day"]["condition"]["icon"];
+                    })
             });
     }
-    let repo = {
-        method: "GET"
-    };
+
     fetch(`http://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=${currentTown}`, repo).then(respone => respone.json())
         .then(data => {
             document.getElementById("sCity").innerHTML = "";
@@ -118,7 +128,7 @@ function CurrentWeather(currentTown) {
             let lon = data["location"]["lon"];
             // initializeMap(lat, lon);
             updateMap(lat, lon);
-            dayData();
+            dayData(currentTown);
             setData(data);
             let country = data.location.country;
             countryDetails(country);
@@ -133,7 +143,7 @@ function CurrentWeather(currentTown) {
                     let lat = data["location"]["lat"];
                     let lon = data["location"]["lon"];
                     updateMap(lat, lon);
-                    dayData();
+                    dayData("Colombo");
                     setData(data);
                     let country = data.location.country;
                     countryDetails(country);
@@ -144,7 +154,7 @@ function CurrentWeather(currentTown) {
 }
 // ================ weather seach ============================
 function weatherSearch() {
-    countryDetails();
+    // countryDetails();
     console.log("weather Search");
     let search = document.getElementById("searchText").value;
     console.log(search);
@@ -153,11 +163,11 @@ function weatherSearch() {
     };
     fetch(`http://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=${search}`, repo).then(respone => respone.json())
         .then(data => {
-            // console.log(data);
-            let Search = search.charAt(0).toUpperCase() + search.slice(1)
+            console.log(data);
+            let Search1 = search.charAt(0).toUpperCase() + search.slice(1)
             document.getElementById("sCity").innerHTML = "";
             document.getElementById("cityName").innerHTML = data.location.name;
-            currentLocation = search;
+            currentLocation = Search1;
 
             let country = data.location.country;
             countryDetails(country);
@@ -166,7 +176,7 @@ function weatherSearch() {
             let lon = data["location"]["lon"];
             updateMap(lat, lon);
 
-            dayData();
+            dayData(search);
             setData(data);
 
         })
@@ -174,7 +184,7 @@ function weatherSearch() {
             console.log("weather search " + error);
             document.getElementById("sCity").innerHTML = "Suggester city ";
             alert('City not found');
-            dayData();
+            dayData(search);
 
 
         })
@@ -191,9 +201,7 @@ function setData(data) {
     let windspeed = document.getElementById("ws_mph").checked;
     let pressure = document.getElementById("ap_mph").checked;
     let gust = document.getElementById("wg_mph").checked;
-    // console.log(windspeed + "speed");
-    // console.log(pressure + "pressure");
-    // console.log(gust + "gust");
+
     if (tem) {
         document.getElementById("temp_c").innerHTML = data["current"]["temp_f"] + " F";
         document.getElementById("temp").innerHTML = data["current"]["temp_f"] + " F";
@@ -222,21 +230,21 @@ function setData(data) {
 
 
 // =================== 7 days forecast ================= 
-function dayData() {
-    let search = document.getElementById("searchText").value;
+function dayData(location) {
+    // let search = document.getElementById("cityName").value;
     for (let i = 1; i < 8; i++) {
         let currentDate = new Date();
         let DaysAgo = new Date(currentDate);
-        DaysAgo.setDate(currentDate.getDate() + 2 - i);
+        DaysAgo.setDate(currentDate.getDate()  - i);
 
         // Format the date to match the API's expected format (YYYY-MM-DD)
         let formattedDate = DaysAgo.toISOString().split('T')[0];
-        let apiUrl = `http://api.weatherapi.com/v1/history.json?key=f743f38e0e294672b4593454240702&q=${search}&dt=${formattedDate}`;
+        let apiUrl = `http://api.weatherapi.com/v1/history.json?key=f743f38e0e294672b4593454240702&q=${location}&dt=${formattedDate}`;
 
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 let d = "d" + i;
                 document.getElementById(d).innerHTML = formattedDate;
                 let tem = "t" + i;
@@ -247,7 +255,35 @@ function dayData() {
 
             })
             .catch(error => {
-                console.log("Error: " + error);
+                // console.log("Error: " + error);
+            });
+
+
+    }
+
+    for (let i = 1; i < 8; i++) {
+        let currentDate = new Date();
+        let DaysAgo = new Date(currentDate);
+        DaysAgo.setDate(currentDate.getDate() + i);
+
+        let formattedDate = DaysAgo.toISOString().split('T')[0];
+        let apiUrl = `http://api.weatherapi.com/v1/forecast.json?key=f743f38e0e294672b4593454240702&q=${location}&dt=${formattedDate}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                let d = "df" + i;
+                document.getElementById(d).innerHTML = formattedDate;
+                let tem = "tf" + i;
+                let img = "iconF" + i;
+                document.getElementById(tem).innerHTML = data["forecast"]["forecastday"]["0"]["day"]["avgtemp_c"] + "°C";
+                document.getElementById(img).src = data["forecast"]["forecastday"]["0"]["day"]["condition"]["icon"];
+           
+
+            })
+            .catch(error => {
+                // console.log("Error: " + error);
             });
     }
 
@@ -274,4 +310,65 @@ function countryDetails(country) {
 
         })
 
+}
+
+// active inactive css  
+
+document.getElementById("history").classList.add("active");
+document.getElementById("future").classList.add("inactive");
+document.getElementById("showTable1").style.backgroundColor = "blue";
+
+document.getElementById("showTable1").addEventListener("click", function () {
+    document.getElementById("history").classList.add("active");
+    document.getElementById("history").classList.remove("inactive");
+    document.getElementById("future").classList.add("inactive");
+    document.getElementById("future").classList.remove("active");
+    document.getElementById("showTable1").style.backgroundColor = "blue";
+    document.getElementById("showTable2").style.backgroundColor = "";
+
+});
+
+document.getElementById("showTable2").addEventListener("click", function () {
+    document.getElementById("history").classList.add("inactive");
+    document.getElementById("history").classList.remove("active");
+    document.getElementById("future").classList.add("active");
+    document.getElementById("future").classList.remove("inactive");
+    document.getElementById("showTable2").style.backgroundColor = "blue";
+    document.getElementById("showTable1").style.backgroundColor = "";
+
+});
+
+
+alerts();
+
+
+function alerts() {
+    let cityName = document.getElementById("alertsCity").value;
+    document.getElementById("alertsCity").setAttribute("aria-placeholder", "null");
+
+    // if (cityName ==null) {
+    //     cityName = document.getElementById("cityName").value;   
+    // }
+    var apiKey = "f743f38e0e294672b4593454240702";
+    var apiUrl = "http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + cityName + "&alerts=yes";
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.alerts && data.alerts.length > 0) {
+                var alertsHtml = "<ul>";
+                data.alerts.forEach(alert => {
+                    alertsHtml += "<li><strong>" + alert.sender_name + ":</strong> " + alert.event + " - " + alert.start + " to " + alert.end + "</li>";
+                });
+                alertsHtml += "</ul>";
+
+                document.getElementById("weatherAlerts").innerHTML = alertsHtml;
+            } else {
+                document.getElementById("weatherAlerts").innerHTML = "No alerts available.";
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+            document.getElementById("weatherAlerts").innerHTML = "Error fetching weather data. Please try again later.";
+        });
 }

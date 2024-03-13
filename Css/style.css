@@ -23,7 +23,7 @@
          color: #fff;
      }
 
-      /* dark mode css  End */
+     /* dark mode css  End */
 
 
      body {
@@ -33,7 +33,7 @@
      .home {
          /* background-image: url(image/weather_img1.jpg); */
          background-image: url(../image/galaxy-night-panorama.jpg);
-       min-height: 100vh;
+         min-height: 100vh;
          min-height: 750px;
          width: 100%;
          background-position: right center;
@@ -85,7 +85,7 @@
 
      }
 
-   
+
      #weatherIcon {
          width: 100px;
          height: 100px;
@@ -159,9 +159,10 @@
          border: 2px solid #302f2f;
 
      }
+
      #wfIcon td img {
-        max-width: 70px;
-        height: auto;
+         max-width: 70px;
+         height: auto;
      }
 
 
@@ -204,29 +205,49 @@
          font-size: 30px;
          padding: 10px 30px;
      }
-     .unit{
-        padding: 50px ;
-        background-color: #302f2f;
-        
+
+     .unit {
+         padding: 50px;
+         background-color: #302f2f;
+
      }
+
      .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-      }
-    .modal-body{
-        padding-bottom: 0;
-        padding-top: 5px;
-    }
-    .modal-content{
-        background-color: #bebec2;
-    }
-    .modal-title{
-        font-weight: 700;
-    }
-    
+         display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5);
+         z-index: 1;
+     }
+
+     .modal-body {
+         padding-bottom: 0;
+         padding-top: 5px;
+     }
+
+     .modal-content {
+         background-color: #bebec2;
+     }
+
+     .modal-title {
+         font-weight: 700;
+     }
+
+     .forecastBtn {
+         height: max-content;
+         width: max-content;
+         margin: 10px 20px;
+         background-color: #ffffff00;
+
+     }
+
+     .active {
+         display: table;
+     }
+
+     .inactive {
+         display: none;
+     }
