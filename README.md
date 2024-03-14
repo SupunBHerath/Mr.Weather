@@ -1,5 +1,5 @@
 # Mr.Weather
-<!-- If you have a logo, include it here -->
+
 Get easy, accurate local weather forecasts for hassle-free planning.
 
 ## Introduction
@@ -24,3 +24,7 @@ To use Mr.Weather locally, follow these steps:
 1. Clone the repository:
    ```bash
    git clone https://github.com/supunbherath/Mr.Weather.git
+Design
+For the design of Mr.Weather, we have utilized Figma. You can view the design prototype and explore the interface by following this .[link]([https://supunbherath.github.io/Mr.Weather/](https://www.figma.com/file/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=0%3A1&mode=design&t=jstewuWCYt4ESZOz-1)https://www.figma.com/file/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=0%3A1&mode=design&t=jstewuWCYt4ESZOz-1)
+
+[View Mr.Weather Figma Prototype]([https://supunbherath.github.io/Mr.Weather/](https://www.figma.com/proto/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=1-2&t=86Hns3nt81PO29wv-1&scaling=min-zoom&page-id=0%3A1&mode=design)https://www.figma.com/proto/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=1-2&t=86Hns3nt81PO29wv-1&scaling=min-zoom&page-id=0%3A1&mode=design) 
