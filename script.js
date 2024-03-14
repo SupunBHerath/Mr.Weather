@@ -1,8 +1,9 @@
-let currentLocation;
-let currentTown;
+let currentLocation = "";
+let currentTown = "";
+
 getCurrentLocation();
-var currentLocationMarker;
-var map;
+let currentLocationMarker;
+let map;
 
 function getCurrentLocation() {
     if (navigator.geolocation) {
@@ -95,7 +96,7 @@ function CurrentWeather(currentTown) {
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 let tem = "currentTemp" + i;
                 let img = "homeIconY" + i;
                 // console.log(tem);
@@ -111,8 +112,8 @@ function CurrentWeather(currentTown) {
                         console.log(data);
                         let tem = "currentTemp" + i;
                         let img = "homeIconY" + i;
-                        // console.log(tem);
                         document.getElementById(tem).innerHTML = data["forecast"]["forecastday"]["0"]["day"]["avgtemp_c"] + "°C";
+                        document.getElementById(forecastM).innerHTML = "Suggester city  : Colombo " ;
                         document.getElementById(img).src = data["forecast"]["forecastday"]["0"]["day"]["condition"]["icon"];
                     })
             });
@@ -126,15 +127,16 @@ function CurrentWeather(currentTown) {
             document.getElementById("cityName").innerHTML = currentTown;
             let lat = data["location"]["lat"];
             let lon = data["location"]["lon"];
-            // initializeMap(lat, lon);
             updateMap(lat, lon);
             dayData(currentTown);
             setData(data);
             let country = data.location.country;
             countryDetails(country);
+            alerts(currentTown);
+
         })
         .catch(error => {
-            alert('City not found');
+            alert('Can not Find your location ' );
             document.getElementById("sCity").innerHTML = "Suggester city ";
             fetch(`http://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=Colombo`, repo).then(respone => respone.json())
                 .then(data => {
@@ -147,6 +149,7 @@ function CurrentWeather(currentTown) {
                     setData(data);
                     let country = data.location.country;
                     countryDetails(country);
+                    alerts("Colombo");
                 })
         })
 
@@ -163,7 +166,8 @@ function weatherSearch() {
     };
     fetch(`http://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=${search}`, repo).then(respone => respone.json())
         .then(data => {
-            console.log(data);
+
+
             let Search1 = search.charAt(0).toUpperCase() + search.slice(1)
             document.getElementById("sCity").innerHTML = "";
             document.getElementById("cityName").innerHTML = data.location.name;
@@ -171,6 +175,8 @@ function weatherSearch() {
 
             let country = data.location.country;
             countryDetails(country);
+            let name = data["location"]["name"];
+            alerts(name);
 
             let lat = data["location"]["lat"];
             let lon = data["location"]["lon"];
@@ -184,7 +190,9 @@ function weatherSearch() {
             console.log("weather search " + error);
             document.getElementById("sCity").innerHTML = "Suggester city ";
             alert('City not found');
-            dayData(search);
+            // dayData(search);
+            // alerts(search);
+
 
 
         })
@@ -235,7 +243,7 @@ function dayData(location) {
     for (let i = 1; i < 8; i++) {
         let currentDate = new Date();
         let DaysAgo = new Date(currentDate);
-        DaysAgo.setDate(currentDate.getDate()  - i);
+        DaysAgo.setDate(currentDate.getDate() - i);
 
         // Format the date to match the API's expected format (YYYY-MM-DD)
         let formattedDate = DaysAgo.toISOString().split('T')[0];
@@ -255,7 +263,7 @@ function dayData(location) {
 
             })
             .catch(error => {
-                // console.log("Error: " + error);
+                console.log("Error: " + error);
             });
 
 
@@ -279,11 +287,11 @@ function dayData(location) {
                 let img = "iconF" + i;
                 document.getElementById(tem).innerHTML = data["forecast"]["forecastday"]["0"]["day"]["avgtemp_c"] + "°C";
                 document.getElementById(img).src = data["forecast"]["forecastday"]["0"]["day"]["condition"]["icon"];
-           
+
 
             })
             .catch(error => {
-                // console.log("Error: " + error);
+                console.log("Error: " + error);
             });
     }
 
@@ -339,16 +347,9 @@ document.getElementById("showTable2").addEventListener("click", function () {
 });
 
 
-alerts();
 
 
-function alerts() {
-    let cityName = document.getElementById("alertsCity").value;
-    document.getElementById("alertsCity").setAttribute("aria-placeholder", "null");
-
-    // if (cityName ==null) {
-    //     cityName = document.getElementById("cityName").value;   
-    // }
+function alerts(cityName) {
     var apiKey = "f743f38e0e294672b4593454240702";
     var apiUrl = "http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + cityName + "&alerts=yes";
 
@@ -358,17 +359,16 @@ function alerts() {
             if (data.alerts && data.alerts.length > 0) {
                 var alertsHtml = "<ul>";
                 data.alerts.forEach(alert => {
-                    alertsHtml += "<li><strong>" + alert.sender_name + ":</strong> " + alert.event + " - " + alert.start + " to " + alert.end + "</li>";
+                    alertsHtml += "<li class='p-2'><strong>" + alert.sender_name + ":</strong> " + alert.event + " - " + alert.start + " to " + alert.end + "</li>";
                 });
                 alertsHtml += "</ul>";
 
                 document.getElementById("weatherAlerts").innerHTML = alertsHtml;
             } else {
-                document.getElementById("weatherAlerts").innerHTML = "No alerts available.";
+                document.getElementById("weatherAlerts").innerHTML = "No news available.";
             }
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
-            document.getElementById("weatherAlerts").innerHTML = "Error fetching weather data. Please try again later.";
         });
 }
