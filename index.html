@@ -33,15 +33,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#weather"> Weather</a>
                         </li>
-                  
+
                         <li class="nav-item">
                             <a class="nav-link " href="#conutry">Country Details </a>
                         </li>
-                       
+
                         <li class="nav-item">
                             <a class="nav-link " href="#news">News </a>
                         </li>
-                       
+
                     </ul>
                     <div class="form-check form-switch darkMode">
                         <label class="form-check-label text-light " for="darkMode">Dark Mode </label>
@@ -57,35 +57,37 @@
             <h3 style="color:rgb(255, 255, 255); font-weight: 700; font-style: italic; ">"Get easy, accurate local
                 weather forecasts for hassle-free planning." </h3>
             <br>
-            <a href="#weather"> <button type="button" class="btn btn-primary" >Find Weather</button></a>
+            <a href="#weather"> <button type="button" class="btn btn-primary">Find Weather</button></a>
 
         </div>
 
         <div id="carouselExampleCaptions" class="carousel slide "
             style=" margin: auto ; padding: 40px; text-align: center; ">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" 
                     aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"class="active"
                     aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner" style="justify-content: center;  padding: 10px;">
-                <div class="carousel-item active">
+                <div class="carousel-item ">
                     <div class="card homeCard">
                         <div class="card-body">
-                            <h3 class="card-title">Yesterday</h3>
+                            <br>
+                            <h3 class="card-title " style="font-weight: 700;" >Yesterday</h3>
                             <img id="homeIconY1" src="image/icon/icon.png" id="" alt="">
 
                             <h3 id="currentTemp1">25.2 °C</h3>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item active">
                     <div class="card homeCard">
                         <div class="card-body">
-                            <h3 class="card-title">Today</h3>
+                            <br>
+                            <h3 class="card-title" style="font-weight: 700;">Today</h3>
                             <img id="homeIconY2" src="image/icon/cloudy.png" id="" alt="">
                             <h3 id="currentTemp2"> 28 °C</h3>
                         </div>
@@ -94,7 +96,8 @@
                 <div class="carousel-item">
                     <div class="card homeCard">
                         <div class="card-body">
-                            <h3 class="card-title">Tomorrow</h3>
+                            <br>
+                            <h3 class="card-title" style="font-weight: 700;" >Tomorrow</h3>
                             <img id="homeIconY3" src="image/icon/sun.png" id="" alt="">
                             <h3 id="currentTemp3"> 30 °C</h3>
                         </div>
@@ -123,7 +126,7 @@
         <div class="cwDivTitle">
             <nav class="navbar navbar-expand-lg  ">
                 <div class="container-fluid">
-                    <h1 class="navbar-brand" id="local-day" style="color: white; font-weight: 600;"> </h1>
+                    <h1 class="navbar-brand" id="" style="color: white; font-weight: 600;">Current Weather [ <span  style='color: blue; font-size: medium;' id="last_up">updating..</span> ]</h1>
                     <div class="d-flex" role="search">
                         <input class="form-control me-2" type="search" id="searchText" placeholder="Search"
                             aria-label="Search">
@@ -133,6 +136,8 @@
                 </div>
             </nav>
         </div>
+      
+    
         <nav class="navbar navbar-expand-lg  ">
             <div class="container-fluid">
                 <table class="cwTbl">
@@ -147,6 +152,7 @@
                             <h1 id="temp">updating..</h1>
                         </td>
                     </tr>
+                   
                 </table>
                 <div class="d-flex m-3" role="search">
                     <h1 id="local-time">updating..</h1>
@@ -281,7 +287,8 @@
         <div class="cwDivTitle">
             <nav class="navbar navbar-expand-lg  ">
                 <div class="container-fluid">
-                    <h1 class="navbar-brand" style="color: white; font-weight: 600;">7 Day's Forecast : <strong style="color: green; font-size: medium;"  id="forecastM"></strong></h1>
+                    <h1 class="navbar-brand" style="color: white; font-weight: 600;">7 Day's Forecast : <strong
+                            style="color: green; font-size: medium;" id="forecastM"></strong></h1>
                 </div>
                 <button id="showTable1" class="btn btn-primary  forecastBtn ">History</button>
                 <button id="showTable2" class="btn btn-primary forecastBtn">Future</button>
@@ -416,42 +423,38 @@
                 </div>
             </nav>
         </div>
-        <div id="map" style="height: 400px;"></div>
+        <div id="map" style="height: 300px;"></div>
     </div>
 
     <!-- map session end  -->
 
 
     <!-- News -->
-    <br> <br>
-    <!-- ///////////////////////////////////////////////////// -->
+    <br>
     <div class="cwDiv m-3" id="news">
         <div class="cwDivTitle">
             <nav class="navbar navbar-expand-lg  ">
                 <div class="container-fluid">
-                    <h1 class="navbar-brand" id="local-day" style="color: white; font-weight: 600;">News </h1>
+                    <h1 class="navbar-brand" id="" style="color: white; font-weight: 600;">News  [ <span id="newsCity" style="color: blue;">updating..</span> ] </h1>
                 </div>
             </nav>
         </div>
-        <nav class="navbar navbar-expand-lg p-3 " id="weatherAlerts">
-           
-        </nav>
+        <div class="container  p-3 " id="weatherAlerts">
+        </div>
         <br>
     </div>
-    </div>
-    <!-- ///////////////////////////////////////////////////// -->
 
+    <!-- news end  -->
 
 
 
     <div class="container-fluid">
-        <!-- Your website content goes here -->
 
         <footer class="footer mt-5">
-            <div class="container mt-4 mb-5">
+            <div class="container mt-4 mb-5" >
                 <div class="row">
                     <div class="col-md-8">
-                        <h5  class="pt-5">Subscribe to Our Newsletter</h5>
+                        <h5 class="pt-5">Subscribe to Our Newsletter</h5>
                         <form class="form-inline subscribe-form mt-4">
                             <div class="input-group" style=" width: 350px;">
                                 <input type="email" class="form-control" placeholder="Enter your email" required>
@@ -477,6 +480,7 @@
         </footer>
     </div>
     <!-- js link  -->
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -485,38 +489,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
-    <script>
-
-
-        function hideOverlay() {
-            $('#temperatureModal').modal('hide');
-        }
-
-        displayLocalTime();
-        displayLocalDay();
-        function displayLocalDay() {
-            let currentDate = new Date();
-            let DaysAgo = new Date(currentDate);
-            // Format the date to match the API's expected format (YYYY-MM-DD)
-            let formattedDate = DaysAgo.toISOString().split('T')[0];
-            let coloredDate = "<span style='color: blue;'>" + formattedDate + "</span>";
-            document.getElementById("local-day").innerHTML = "Current Weather : [ " + coloredDate + " ]";
-        }
-
-        function displayLocalTime() {
-            var now = new Date();
-            var localTime = now.toLocaleTimeString();
-            document.getElementById('local-time').innerHTML = localTime;
-        }
-        setInterval(displayLocalTime, 1000);
-        window.onload = displayLocalTime;
-
-
-
-        document.getElementById('darkMode').addEventListener('change', function () {
-            document.body.classList.toggle('dark-mode', this.checked);
-        });
-    </script>
 
 
 </body>
