@@ -25,6 +25,6 @@ To use Mr.Weather locally, follow these steps:
 
 For the creation of Mr.Weather, we have used Figma. By following this you can see the design prototype and see the Figma prototype.
 
-- [Design link](https://supunbherath.github.io/Mr.Weather/](https://www.figma.com/file/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=0%3A1&mode=design&t=jstewuWCYt4ESZOz-1)https://www.figma.com/file/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=0%3A1&mode=design&t=jstewuWCYt4ESZOz-1)
+- [Design link](https://www.figma.com/file/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=0%3A1&mode=design&t=jstewuWCYt4ESZOz-1)
   
-- [View Figma Prototype ](https://supunbherath.github.io/Mr.Weather/](https://www.figma.com/proto/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=1-2&t=86Hns3nt81PO29wv-1&scaling=min-zoom&page-id=0%3A1&mode=design)https://www.figma.com/proto/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=1-2&t=86Hns3nt81PO29wv-1&scaling=min-zoom&page-id=0%3A1&mode=design) 
+- [View Figma Prototype ](https://www.figma.com/proto/KtSDTcJ7SAMZLlObBhyarU/Mr.Weather?type=design&node-id=1-2&t=86Hns3nt81PO29wv-1&scaling=min-zoom&page-id=0%3A1&mode=design)
