@@ -155,12 +155,7 @@ function CurrentWeather(currentTown) {
 
 
 }
-// ================ weather seach ============================
-function weatherSearch() {
-    // countryDetails();
-    console.log("weather Search");
-    let search = document.getElementById("searchText").value;
-    console.log(search);
+function weatherDataSet(search){
     let repo = {
         method: "GET"
     };
@@ -196,7 +191,19 @@ function weatherSearch() {
 
 
         })
+}
+// ================ weather seach ============================
+function weatherSearch() {
+    // 
+    console.log("weather Search");
+    let search = document.getElementById("searchText").value;
+    if (search.length === 0){
+        weatherDataSet(currentTown);
+          
+    }else{
+        weatherDataSet(search);
 
+    }
 };
 function setData(data) {
     // console.log(data);
