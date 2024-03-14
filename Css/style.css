@@ -251,3 +251,9 @@
      .inactive {
          display: none;
      }
+     footer{
+        background-image: url(../image/galaxy-night-panorama.jpg);
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+     }
