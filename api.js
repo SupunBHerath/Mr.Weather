@@ -1,14 +1,13 @@
-getCurrentLocation();
-displayLocalTime();
-
-
-let currentLocation = "";
-let currentTown = "";
 
 let currentLocationMarker;
 let map;
+let latitude;
+let longitude;
+let currentLocation;
+getCurrentLocation(); 
 
-function getCurrentLocation() {
+
+ function getCurrentLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function (position) {
@@ -43,15 +42,25 @@ function initializeMap(latitude, longitude) {
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
         .then(response => response.json())
         .then(data => {
-            const locationName = data.display_name;
-            currentLocation = data['address']['hamlet'];
+            // const locationName = data.display_name;
+            currentLocation = data['address']['village'];
             currentTown = data['address']['town'];
+            console.log("================================");
+             console.log(data);
+            currentWeather(latitude +","+longitude);
+            locationWeather(latitude +","+longitude);
+            currentLocation =latitude +","+longitude ;
 
-            CurrentWeather(currentTown);
 
             currentLocationMarker = L.marker([latitude, longitude]).addTo(map);
         })
-        .catch(error => console.error('Error fetching location name:', error));
+        .catch(error =>{
+       console.log("location error"+error);
+        locationWeather("Colombo");
+        currentWeather("Colombo");
+
+    }
+        );
 }
 
 
@@ -70,7 +79,6 @@ function updateMap(newLatitude, newLongitude) {
         .then(response => response.json())
         .then(data => {
             const locationName = data.display_name;
-            currentLocation = data['address']['hamlet'];
             currentTown = data['address']['town'];
             currentLocationMarker = L.marker([newLatitude, newLongitude]).addTo(map);
         })
@@ -78,22 +86,19 @@ function updateMap(newLatitude, newLongitude) {
 }
 
 
-//  =================================  Current  weather ===========================
+// ======================================home page data set ========================================
 
-function CurrentWeather(currentTown) {
-    console.log("Location" + currentTown);
+function locationWeather(location) {
     let repo = {
         method: "GET"
     };
-
     for (let i = 1; i < 4; i++) {
         let currentDate = new Date();
         let DaysAgo = new Date(currentDate);
         DaysAgo.setDate(currentDate.getDate() - i);
 
-        // Format the date to match the API's expected format (YYYY-MM-DD)
         let formattedDate = DaysAgo.toISOString().split('T')[0];
-        let apiUrl = `http://api.weatherapi.com/v1/history.json?key=f743f38e0e294672b4593454240702&q=${currentTown}&dt=${formattedDate}`;
+        let apiUrl = `https://api.weatherapi.com/v1/history.json?key=f743f38e0e294672b4593454240702&q=${location}&dt=${formattedDate}`;
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -102,15 +107,12 @@ function CurrentWeather(currentTown) {
                 let img = "homeIconY" + i;
                 document.getElementById(tem).innerHTML = data["forecast"]["forecastday"]["0"]["day"]["avgtemp_c"] + "°C";
                 document.getElementById(img).src = data["forecast"]["forecastday"]["0"]["day"]["condition"]["icon"];
-
             })
             .catch(error => {
-                // console.log("Failed", error);
-                let apiUrl = `http://api.weatherapi.com/v1/history.json?key=f743f38e0e294672b4593454240702&q="Colombo"&dt=${formattedDate}`;
+                let apiUrl = `https://api.weatherapi.com/v1/history.json?key=f743f38e0e294672b4593454240702&q=Colombo&dt=${formattedDate}`;
                 fetch(apiUrl)
                     .then(response => response.json())
                     .then(data => {
-                        // console.log(data);
                         let tem = "currentTemp" + i;
                         let img = "homeIconY" + i;
                         document.getElementById(tem).innerHTML = data["forecast"]["forecastday"]["0"]["day"]["avgtemp_c"] + "°C";
@@ -118,30 +120,39 @@ function CurrentWeather(currentTown) {
                     })
             });
     }
+}
 
-    fetch(`http://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=${currentTown}`, repo).then(respone => respone.json())
+// ==============================home page data set end ========================================
+
+function currentWeather(location) {
+    let repo = {
+        method: "GET"
+    };
+
+    fetch(`https://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=${location}`, repo).then(respone => respone.json())
         .then(data => {
+            console.log(data);
             document.getElementById("sCity").innerHTML = "";
             document.getElementById("cwIcon").src = data["current"]["condition"]["icon"];
-            document.getElementById("cityName").innerHTML = currentTown;
-            document.getElementById("newsCity").innerHTML = currentTown;
+            document.getElementById("cityName").innerHTML = data.location.name;
+            document.getElementById("newsCity").innerHTML = data.location.name;
             let lat = data["location"]["lat"];
             let lon = data["location"]["lon"];
             updateMap(lat, lon);
-            dayData(currentTown);
+            dayData(location);
             setData(data);
             let country = data.location.country;
             countryDetails(country);
-            alerts(currentTown);
-
+            alerts(location);
         })
         .catch(error => {
+            console.log("search"+error.message);
             alert('Can not Find your location ');
             document.getElementById("sCity").innerHTML = "Suggester city ";
-            fetch(`http://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=Colombo`, repo).then(respone => respone.json())
+            fetch(`https://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=Colombo`, repo).then(respone => respone.json())
                 .then(data => {
                     document.getElementById("cityName").innerHTML = "Colombo";
-                    document.getElementById("news").innerHTML = "Colombo";
+                    document.getElementById("newsCity").innerHTML = "Colombo";
                     let lat = data["location"]["lat"];
                     let lon = data["location"]["lon"];
                     updateMap(lat, lon);
@@ -152,61 +163,24 @@ function CurrentWeather(currentTown) {
                     alerts("Colombo");
                 })
         })
-
-
 }
-// ================ weather seach ============================
+
 function weatherSearch() {
-    // countryDetails();
-    console.log("weather Search");
-    let search = document.getElementById("searchText").value;
-    console.log(search);
-    let repo = {
-        method: "GET"
-    };
-    fetch(`http://api.weatherapi.com/v1/current.json?key=f743f38e0e294672b4593454240702&q=${search}`, repo).then(respone => respone.json())
-        .then(data => {
+    let search = document.getElementById("searchText").value.trim();
+    if (search.length === 0) {
+        currentWeather(currentLocation);
+    } else {
+        currentWeather(search);
+    }
+}
 
-
-            let Search1 = search.charAt(0).toUpperCase() + search.slice(1)
-            document.getElementById("sCity").innerHTML = "";
-            document.getElementById("cityName").innerHTML = data.location.name;
-            document.getElementById("newsCity").innerHTML = data.location.name;
-            currentLocation = Search1;
-
-            let country = data.location.country;
-            countryDetails(country);
-            let name = data["location"]["name"];
-            alerts(name);
-
-            let lat = data["location"]["lat"];
-            let lon = data["location"]["lon"];
-            updateMap(lat, lon);
-
-            dayData(search);
-            setData(data);
-
-        })
-        .catch(error => {
-            console.log("weather search " + error);
-            document.getElementById("sCity").innerHTML = "Suggester city ";
-            alert('City not found');
-         
-
-
-
-        })
-
-};
 function setData(data) {
-    // console.log(data);
     document.getElementById("cwIcon").src = data["current"]["condition"]["icon"];
     document.getElementById("uv").innerHTML = data["current"]["uv"];
     document.getElementById("humidity").innerHTML = data["current"]["humidity"] + " % ";
     document.getElementById("url").innerHTML = data["current"]["condition"]["text"];
     document.getElementById("last_up").innerHTML = data["current"]["last_updated"];
 
-    //change unit 
     let tem = document.getElementById("t_f").checked;
     let windspeed = document.getElementById("ws_mph").checked;
     let pressure = document.getElementById("ap_mph").checked;
@@ -236,38 +210,28 @@ function setData(data) {
     }
 }
 
-
-
-
-// =================== 7 days forecast ================= 
 function dayData(location) {
     for (let i = 1; i < 8; i++) {
         let currentDate = new Date();
         let DaysAgo = new Date(currentDate);
         DaysAgo.setDate(currentDate.getDate() - i);
 
-        // Format the date to match the API's expected format (YYYY-MM-DD)
         let formattedDate = DaysAgo.toISOString().split('T')[0];
-        let apiUrl = `http://api.weatherapi.com/v1/history.json?key=f743f38e0e294672b4593454240702&q=${location}&dt=${formattedDate}`;
+        let apiUrl = `https://api.weatherapi.com/v1/history.json?key=f743f38e0e294672b4593454240702&q=${location}&dt=${formattedDate}`;
 
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                // console.log(data);
                 let d = "d" + i;
                 document.getElementById(d).innerHTML = formattedDate;
                 let tem = "t" + i;
                 let img = "i" + i;
                 document.getElementById(tem).innerHTML = data["forecast"]["forecastday"]["0"]["day"]["avgtemp_c"] + "°C";
                 document.getElementById(img).src = data["forecast"]["forecastday"]["0"]["day"]["condition"]["icon"];
-
-
             })
             .catch(error => {
                 console.log("Error: " + error);
             });
-
-
     }
 
     for (let i = 1; i < 8; i++) {
@@ -276,29 +240,23 @@ function dayData(location) {
         DaysAgo.setDate(currentDate.getDate() + i);
 
         let formattedDate = DaysAgo.toISOString().split('T')[0];
-        let apiUrl = `http://api.weatherapi.com/v1/forecast.json?key=f743f38e0e294672b4593454240702&q=${location}&dt=${formattedDate}`;
+        let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=f743f38e0e294672b4593454240702&q=${location}&dt=${formattedDate}`;
 
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                // console.log(data);
                 let d = "df" + i;
                 document.getElementById(d).innerHTML = formattedDate;
                 let tem = "tf" + i;
                 let img = "iconF" + i;
                 document.getElementById(tem).innerHTML = data["forecast"]["forecastday"]["0"]["day"]["avgtemp_c"] + "°C";
                 document.getElementById(img).src = data["forecast"]["forecastday"]["0"]["day"]["condition"]["icon"];
-
-
             })
             .catch(error => {
                 console.log("Error: " + error);
             });
     }
-
-
 }
-
 // country details =================================================================
 
 function countryDetails(country) {
@@ -363,13 +321,15 @@ function alerts(cityName) {
                 });
                 alertsHtml += "</ul>";
 
-                document.getElementById("weatherAlerts").innerHTML = alertsHtml;
+                document.getElementById("wA").innerHTML = alertsHtml;
             } else {
-                document.getElementById("weatherAlerts").innerHTML = "No news available.";
+                document.getElementById("wA").innerHTML = "No news available.";
             }
         })
         .catch(error => {
-            console.error('Error fetching weather data:', error);
+            console.log("alert"+error.message);
+            document.getElementById("wA").innerHTML = "No news available.";
+
         });
 }
 
